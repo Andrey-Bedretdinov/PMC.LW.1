@@ -1,0 +1,257 @@
+
+test.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         0000000e  00800100  0000012c  000001a0  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         0000012c  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .debug_aranges 00000020  00000000  00000000  000001ae  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_pubnames 0000004a  00000000  00000000  000001ce  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   00000236  00000000  00000000  00000218  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 0000015c  00000000  00000000  0000044e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   000001ee  00000000  00000000  000005aa  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  00000050  00000000  00000000  00000798  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    00000119  00000000  00000000  000007e8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_loc    000000be  00000000  00000000  00000901  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_ranges 00000090  00000000  00000000  000009bf  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+   8:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+   c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  10:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  14:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  18:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  1c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  20:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  24:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  28:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  2c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  30:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  34:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  38:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  3c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  40:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  44:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  48:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  4c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  50:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  54:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  58:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  5c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  60:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  64:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	ec e2       	ldi	r30, 0x2C	; 44
+  7c:	f1 e0       	ldi	r31, 0x01	; 1
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <.do_copy_data_start>
+
+00000080 <.do_copy_data_loop>:
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+
+00000084 <.do_copy_data_start>:
+  84:	ae 30       	cpi	r26, 0x0E	; 14
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <.do_copy_data_loop>
+  8a:	0e 94 78 00 	call	0xf0	; 0xf0 <main>
+  8e:	0c 94 94 00 	jmp	0x128	; 0x128 <_exit>
+
+00000092 <__bad_interrupt>:
+  92:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000096 <uart_init>:
+
+// Функция для инициализации UART
+void uart_init() {
+    // Установить скорость передачи данных 9600 бод
+    uint16_t ubrr_value = 51;  // Для частоты 8 МГц и скорости 9600 бод
+    UBRR0H = (ubrr_value >> 8);  // Записать старший байт в UBRR0H
+  96:	10 92 c5 00 	sts	0x00C5, r1
+    UBRR0L = ubrr_value;         // Записать младший байт в UBRR0L
+  9a:	83 e3       	ldi	r24, 0x33	; 51
+  9c:	80 93 c4 00 	sts	0x00C4, r24
+
+    // Включить передатчик
+    UCSR0B = (1 << TXEN0);  // Включить передатчик (TX)
+  a0:	88 e0       	ldi	r24, 0x08	; 8
+  a2:	80 93 c1 00 	sts	0x00C1, r24
+
+    // Настроить формат фрейма: 8 бит данных, 1 стоповый бит
+    UCSR0C = (1 << UCSZ01) | (1 << UCSZ00);
+  a6:	86 e0       	ldi	r24, 0x06	; 6
+  a8:	80 93 c2 00 	sts	0x00C2, r24
+}
+  ac:	08 95       	ret
+
+000000ae <uart_transmit>:
+
+// Функция для отправки одного байта через UART
+void uart_transmit(uint8_t data) {
+  ae:	98 2f       	mov	r25, r24
+    while (!(UCSR0A & (1 << UDRE0)));  // Ожидание готовности передатчика
+  b0:	80 91 c0 00 	lds	r24, 0x00C0
+  b4:	85 ff       	sbrs	r24, 5
+  b6:	fc cf       	rjmp	.-8      	; 0xb0 <uart_transmit+0x2>
+    UDR0 = data;  // Запись данных в регистр для передачи
+  b8:	90 93 c6 00 	sts	0x00C6, r25
+}
+  bc:	08 95       	ret
+
+000000be <uart_print>:
+
+// Функция для отправки строки через UART
+void uart_print(const char* str) {
+  be:	fc 01       	movw	r30, r24
+    milliseconds can be achieved.
+ */
+void
+_delay_loop_2(uint16_t __count)
+{
+	__asm__ volatile (
+  c0:	40 e9       	ldi	r20, 0x90	; 144
+  c2:	51 e0       	ldi	r21, 0x01	; 1
+    while (*str) {
+  c4:	90 81       	ld	r25, Z
+  c6:	99 23       	and	r25, r25
+  c8:	91 f0       	breq	.+36     	; 0xee <uart_print+0x30>
+    UCSR0C = (1 << UCSZ01) | (1 << UCSZ00);
+}
+
+// Функция для отправки одного байта через UART
+void uart_transmit(uint8_t data) {
+    while (!(UCSR0A & (1 << UDRE0)));  // Ожидание готовности передатчика
+  ca:	80 91 c0 00 	lds	r24, 0x00C0
+  ce:	85 ff       	sbrs	r24, 5
+  d0:	fc cf       	rjmp	.-8      	; 0xca <uart_print+0xc>
+    UDR0 = data;  // Запись данных в регистр для передачи
+  d2:	90 93 c6 00 	sts	0x00C6, r25
+  d6:	24 ef       	ldi	r18, 0xF4	; 244
+  d8:	31 e0       	ldi	r19, 0x01	; 1
+  da:	ca 01       	movw	r24, r20
+  dc:	01 97       	sbiw	r24, 0x01	; 1
+  de:	f1 f7       	brne	.-4      	; 0xdc <uart_print+0x1e>
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+  e0:	21 50       	subi	r18, 0x01	; 1
+  e2:	30 40       	sbci	r19, 0x00	; 0
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+  e4:	d1 f7       	brne	.-12     	; 0xda <uart_print+0x1c>
+}
+
+// Функция для отправки строки через UART
+void uart_print(const char* str) {
+    while (*str) {
+        uart_transmit(*str++);  // Отправить каждый символ строки
+  e6:	31 96       	adiw	r30, 0x01	; 1
+    UDR0 = data;  // Запись данных в регистр для передачи
+}
+
+// Функция для отправки строки через UART
+void uart_print(const char* str) {
+    while (*str) {
+  e8:	90 81       	ld	r25, Z
+  ea:	99 23       	and	r25, r25
+  ec:	71 f7       	brne	.-36     	; 0xca <uart_print+0xc>
+        uart_transmit(*str++);  // Отправить каждый символ строки
+		_delay_ms(50);
+    }
+}
+  ee:	08 95       	ret
+
+000000f0 <main>:
+
+int main(void) {
+  f0:	cf 93       	push	r28
+  f2:	df 93       	push	r29
+
+// Функция для инициализации UART
+void uart_init() {
+    // Установить скорость передачи данных 9600 бод
+    uint16_t ubrr_value = 51;  // Для частоты 8 МГц и скорости 9600 бод
+    UBRR0H = (ubrr_value >> 8);  // Записать старший байт в UBRR0H
+  f4:	10 92 c5 00 	sts	0x00C5, r1
+    UBRR0L = ubrr_value;         // Записать младший байт в UBRR0L
+  f8:	83 e3       	ldi	r24, 0x33	; 51
+  fa:	80 93 c4 00 	sts	0x00C4, r24
+
+    // Включить передатчик
+    UCSR0B = (1 << TXEN0);  // Включить передатчик (TX)
+  fe:	88 e0       	ldi	r24, 0x08	; 8
+ 100:	80 93 c1 00 	sts	0x00C1, r24
+
+    // Настроить формат фрейма: 8 бит данных, 1 стоповый бит
+    UCSR0C = (1 << UCSZ01) | (1 << UCSZ00);
+ 104:	86 e0       	ldi	r24, 0x06	; 6
+ 106:	80 93 c2 00 	sts	0x00C2, r24
+ 10a:	c0 e9       	ldi	r28, 0x90	; 144
+ 10c:	d1 e0       	ldi	r29, 0x01	; 1
+
+int main(void) {
+    uart_init();  // Инициализация UART
+
+    while (1) {
+        uart_print("Hello World\r\n");  // Вывод строки "Hello World" на виртуальный терминал
+ 10e:	80 e0       	ldi	r24, 0x00	; 0
+ 110:	91 e0       	ldi	r25, 0x01	; 1
+ 112:	0e 94 5f 00 	call	0xbe	; 0xbe <uart_print>
+ 116:	24 ef       	ldi	r18, 0xF4	; 244
+ 118:	31 e0       	ldi	r19, 0x01	; 1
+ 11a:	ce 01       	movw	r24, r28
+ 11c:	01 97       	sbiw	r24, 0x01	; 1
+ 11e:	f1 f7       	brne	.-4      	; 0x11c <main+0x2c>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 120:	21 50       	subi	r18, 0x01	; 1
+ 122:	30 40       	sbci	r19, 0x00	; 0
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 124:	d1 f7       	brne	.-12     	; 0x11a <main+0x2a>
+ 126:	f3 cf       	rjmp	.-26     	; 0x10e <main+0x1e>
+
+00000128 <_exit>:
+ 128:	f8 94       	cli
+
+0000012a <__stop_program>:
+ 12a:	ff cf       	rjmp	.-2      	; 0x12a <__stop_program>

@@ -1,0 +1,480 @@
+
+numbers.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         0000000a  00800100  00000276  000002ea  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000276  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .debug_aranges 00000020  00000000  00000000  000002f4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_pubnames 00000084  00000000  00000000  00000314  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   00000370  00000000  00000000  00000398  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 0000018d  00000000  00000000  00000708  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   00000299  00000000  00000000  00000895  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  00000070  00000000  00000000  00000b30  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    00000171  00000000  00000000  00000ba0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_loc    000000bf  00000000  00000000  00000d11  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_ranges 00000048  00000000  00000000  00000dd0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+   8:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+   c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  10:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  14:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  18:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  1c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  20:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  24:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  28:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  2c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  30:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  34:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  38:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  3c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  40:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  44:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  48:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  4c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  50:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  54:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  58:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  5c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  60:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  64:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	e6 e7       	ldi	r30, 0x76	; 118
+  7c:	f2 e0       	ldi	r31, 0x02	; 2
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <.do_copy_data_start>
+
+00000080 <.do_copy_data_loop>:
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+
+00000084 <.do_copy_data_start>:
+  84:	aa 30       	cpi	r26, 0x0A	; 10
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <.do_copy_data_loop>
+  8a:	0e 94 10 01 	call	0x220	; 0x220 <main>
+  8e:	0c 94 39 01 	jmp	0x272	; 0x272 <_exit>
+
+00000092 <__bad_interrupt>:
+  92:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000096 <shiftOut>:
+#define DIGIT_2 PC4    // Подключено к правому разряду 2 (десятки)
+#define DIGIT_3 PC3    // Подключено к правому разряду 3 (сотни)
+#define DIGIT_4 PC2    // Подключено к правому разряду 4 (тысячи)
+
+// Функция для отправки байта в сдвиговый регистр 74HC595
+void shiftOut(uint8_t data) {
+  96:	48 2f       	mov	r20, r24
+  98:	50 e0       	ldi	r21, 0x00	; 0
+  9a:	27 e0       	ldi	r18, 0x07	; 7
+  9c:	30 e0       	ldi	r19, 0x00	; 0
+    can be achieved.
+*/
+void
+_delay_loop_1(uint8_t __count)
+{
+	__asm__ volatile (
+  9e:	65 e3       	ldi	r22, 0x35	; 53
+  a0:	0c c0       	rjmp	.+24     	; 0xba <shiftOut+0x24>
+    for (int i = 0; i < 8; i++) {
+        // Передача данных на DS (Q7)
+        if (data & (1 << (7 - i))) {
+            PORTB |= (1 << DS_PIN);
+  a2:	29 9a       	sbi	0x05, 1	; 5
+        } else {
+            PORTB &= ~(1 << DS_PIN);
+        }
+        // Подача импульса на SH_CP (сдвиг)
+        PORTB |= (1 << SH_CP_PIN);
+  a4:	28 9a       	sbi	0x05, 0	; 5
+  a6:	86 2f       	mov	r24, r22
+  a8:	8a 95       	dec	r24
+  aa:	f1 f7       	brne	.-4      	; 0xa8 <shiftOut+0x12>
+        _delay_us(10);
+        PORTB &= ~(1 << SH_CP_PIN);
+  ac:	28 98       	cbi	0x05, 0	; 5
+  ae:	21 50       	subi	r18, 0x01	; 1
+  b0:	30 40       	sbci	r19, 0x00	; 0
+#define DIGIT_3 PC3    // Подключено к правому разряду 3 (сотни)
+#define DIGIT_4 PC2    // Подключено к правому разряду 4 (тысячи)
+
+// Функция для отправки байта в сдвиговый регистр 74HC595
+void shiftOut(uint8_t data) {
+    for (int i = 0; i < 8; i++) {
+  b2:	8f ef       	ldi	r24, 0xFF	; 255
+  b4:	2f 3f       	cpi	r18, 0xFF	; 255
+  b6:	38 07       	cpc	r19, r24
+  b8:	59 f0       	breq	.+22     	; 0xd0 <shiftOut+0x3a>
+        // Передача данных на DS (Q7)
+        if (data & (1 << (7 - i))) {
+  ba:	ca 01       	movw	r24, r20
+  bc:	02 2e       	mov	r0, r18
+  be:	02 c0       	rjmp	.+4      	; 0xc4 <shiftOut+0x2e>
+  c0:	95 95       	asr	r25
+  c2:	87 95       	ror	r24
+  c4:	0a 94       	dec	r0
+  c6:	e2 f7       	brpl	.-8      	; 0xc0 <shiftOut+0x2a>
+  c8:	80 fd       	sbrc	r24, 0
+  ca:	eb cf       	rjmp	.-42     	; 0xa2 <shiftOut+0xc>
+            PORTB |= (1 << DS_PIN);
+        } else {
+            PORTB &= ~(1 << DS_PIN);
+  cc:	29 98       	cbi	0x05, 1	; 5
+  ce:	ea cf       	rjmp	.-44     	; 0xa4 <shiftOut+0xe>
+        PORTB |= (1 << SH_CP_PIN);
+        _delay_us(10);
+        PORTB &= ~(1 << SH_CP_PIN);
+    }
+    // Подача импульса на ST_CP (запись данных на выход)
+    PORTB |= (1 << ST_CP_PIN);
+  d0:	2a 9a       	sbi	0x05, 2	; 5
+  d2:	85 e3       	ldi	r24, 0x35	; 53
+  d4:	8a 95       	dec	r24
+  d6:	f1 f7       	brne	.-4      	; 0xd4 <shiftOut+0x3e>
+    _delay_us(10);
+    PORTB &= ~(1 << ST_CP_PIN);
+  d8:	2a 98       	cbi	0x05, 2	; 5
+}
+  da:	08 95       	ret
+
+000000dc <init_shift_register_control>:
+
+// Инициализация MR и OE
+void init_shift_register_control() {
+    // Настроить PB4 и PB5 как выходы для управления MR и OE
+    DDRB |= (1 << MR_PIN) | (1 << OE_PIN);
+  dc:	84 b1       	in	r24, 0x04	; 4
+  de:	88 61       	ori	r24, 0x18	; 24
+  e0:	84 b9       	out	0x04, r24	; 4
+
+    // Установить MR в логический 1 (сброс отключен)
+    PORTB |= (1 << MR_PIN);
+  e2:	2b 9a       	sbi	0x05, 3	; 5
+
+    // Установить OE в логический 0 (выходы включены)
+    PORTB &= ~(1 << OE_PIN);
+  e4:	2c 98       	cbi	0x05, 4	; 5
+}
+  e6:	08 95       	ret
+
+000000e8 <init_display_control>:
+
+// Инициализация управления разрядами индикатора
+void init_display_control() {
+    // Настроить PC2, PC3, PC4, PC5 как выходы для управления разрядами
+    DDRC |= (1 << DIGIT_1) | (1 << DIGIT_2) | (1 << DIGIT_3) | (1 << DIGIT_4);
+  e8:	87 b1       	in	r24, 0x07	; 7
+  ea:	8c 63       	ori	r24, 0x3C	; 60
+  ec:	87 b9       	out	0x07, r24	; 7
+}
+  ee:	08 95       	ret
+
+000000f0 <select_digit>:
+
+// Функция для отображения одного разряда (цифры) на индикаторе
+void select_digit(uint8_t digit) {
+  f0:	98 2f       	mov	r25, r24
+    // Сначала отключаем все разряды
+    PORTC &= ~((1 << DIGIT_1) | (1 << DIGIT_2) | (1 << DIGIT_3) | (1 << DIGIT_4));
+  f2:	88 b1       	in	r24, 0x08	; 8
+  f4:	83 7c       	andi	r24, 0xC3	; 195
+  f6:	88 b9       	out	0x08, r24	; 8
+
+    // Включаем только один выбранный разряд
+    switch (digit) {
+  f8:	92 30       	cpi	r25, 0x02	; 2
+  fa:	69 f0       	breq	.+26     	; 0x116 <select_digit+0x26>
+  fc:	93 30       	cpi	r25, 0x03	; 3
+  fe:	28 f0       	brcs	.+10     	; 0x10a <select_digit+0x1a>
+ 100:	93 30       	cpi	r25, 0x03	; 3
+ 102:	59 f0       	breq	.+22     	; 0x11a <select_digit+0x2a>
+ 104:	94 30       	cpi	r25, 0x04	; 4
+ 106:	29 f0       	breq	.+10     	; 0x112 <select_digit+0x22>
+ 108:	08 95       	ret
+ 10a:	91 30       	cpi	r25, 0x01	; 1
+ 10c:	e9 f7       	brne	.-6      	; 0x108 <select_digit+0x18>
+        case 1:
+            PORTC |= (1 << DIGIT_1);  // Единицы
+ 10e:	45 9a       	sbi	0x08, 5	; 8
+ 110:	08 95       	ret
+            break;
+        case 3:
+            PORTC |= (1 << DIGIT_3);  // Сотни
+            break;
+        case 4:
+            PORTC |= (1 << DIGIT_4);  // Тысячи
+ 112:	42 9a       	sbi	0x08, 2	; 8
+ 114:	08 95       	ret
+    switch (digit) {
+        case 1:
+            PORTC |= (1 << DIGIT_1);  // Единицы
+            break;
+        case 2:
+            PORTC |= (1 << DIGIT_2);  // Десятки
+ 116:	44 9a       	sbi	0x08, 4	; 8
+ 118:	08 95       	ret
+            break;
+        case 3:
+            PORTC |= (1 << DIGIT_3);  // Сотни
+ 11a:	43 9a       	sbi	0x08, 3	; 8
+ 11c:	08 95       	ret
+
+0000011e <display_value>:
+            break;
+    }
+}
+
+// Функция для отображения значений на индикаторе
+void display_value(uint16_t value) {
+ 11e:	cf 92       	push	r12
+ 120:	df 92       	push	r13
+ 122:	ef 92       	push	r14
+ 124:	ff 92       	push	r15
+ 126:	0f 93       	push	r16
+ 128:	1f 93       	push	r17
+ 12a:	df 93       	push	r29
+ 12c:	cf 93       	push	r28
+ 12e:	cd b7       	in	r28, 0x3d	; 61
+ 130:	de b7       	in	r29, 0x3e	; 62
+ 132:	2a 97       	sbiw	r28, 0x0a	; 10
+ 134:	0f b6       	in	r0, 0x3f	; 63
+ 136:	f8 94       	cli
+ 138:	de bf       	out	0x3e, r29	; 62
+ 13a:	0f be       	out	0x3f, r0	; 63
+ 13c:	cd bf       	out	0x3d, r28	; 61
+ 13e:	6c 01       	movw	r12, r24
+        0b10010010,  // 5: A, c, d, f, g
+        0b10000010,  // 6: A, c, d, e, f, g
+        0b11111000,  // 7: A, b, c
+        0b10000000,  // 8: A, b, c, d, e, f, g
+        0b10010000   // 9: A, b, c, d, f, g
+    };
+ 140:	7e 01       	movw	r14, r28
+ 142:	08 94       	sec
+ 144:	e1 1c       	adc	r14, r1
+ 146:	f1 1c       	adc	r15, r1
+ 148:	d7 01       	movw	r26, r14
+ 14a:	e0 e0       	ldi	r30, 0x00	; 0
+ 14c:	f1 e0       	ldi	r31, 0x01	; 1
+ 14e:	8a e0       	ldi	r24, 0x0A	; 10
+ 150:	01 90       	ld	r0, Z+
+ 152:	0d 92       	st	X+, r0
+ 154:	81 50       	subi	r24, 0x01	; 1
+ 156:	e1 f7       	brne	.-8      	; 0x150 <display_value+0x32>
+
+    // Отображение цифр поочередно на 4 разрядах (от единиц к тысячам)
+    select_digit(1);  // Выбираем разряд 1 (единицы)
+ 158:	81 e0       	ldi	r24, 0x01	; 1
+ 15a:	0e 94 78 00 	call	0xf0	; 0xf0 <select_digit>
+    shiftOut(digits[value % 10]);  // Единицы
+ 15e:	c6 01       	movw	r24, r12
+ 160:	6a e0       	ldi	r22, 0x0A	; 10
+ 162:	70 e0       	ldi	r23, 0x00	; 0
+ 164:	0e 94 25 01 	call	0x24a	; 0x24a <__udivmodhi4>
+ 168:	f7 01       	movw	r30, r14
+ 16a:	e8 0f       	add	r30, r24
+ 16c:	f9 1f       	adc	r31, r25
+ 16e:	80 81       	ld	r24, Z
+ 170:	0e 94 4b 00 	call	0x96	; 0x96 <shiftOut>
+    milliseconds can be achieved.
+ */
+void
+_delay_loop_2(uint16_t __count)
+{
+	__asm__ volatile (
+ 174:	00 e2       	ldi	r16, 0x20	; 32
+ 176:	1e e4       	ldi	r17, 0x4E	; 78
+ 178:	c8 01       	movw	r24, r16
+ 17a:	01 97       	sbiw	r24, 0x01	; 1
+ 17c:	f1 f7       	brne	.-4      	; 0x17a <display_value+0x5c>
+    _delay_ms(5);  // Небольшая задержка для отображения
+
+    select_digit(2);  // Выбираем разряд 2 (десятки)
+ 17e:	82 e0       	ldi	r24, 0x02	; 2
+ 180:	0e 94 78 00 	call	0xf0	; 0xf0 <select_digit>
+    shiftOut(digits[(value / 10) % 10]);  // Десятки
+ 184:	c6 01       	movw	r24, r12
+ 186:	6a e0       	ldi	r22, 0x0A	; 10
+ 188:	70 e0       	ldi	r23, 0x00	; 0
+ 18a:	0e 94 25 01 	call	0x24a	; 0x24a <__udivmodhi4>
+ 18e:	cb 01       	movw	r24, r22
+ 190:	6a e0       	ldi	r22, 0x0A	; 10
+ 192:	70 e0       	ldi	r23, 0x00	; 0
+ 194:	0e 94 25 01 	call	0x24a	; 0x24a <__udivmodhi4>
+ 198:	f7 01       	movw	r30, r14
+ 19a:	e8 0f       	add	r30, r24
+ 19c:	f9 1f       	adc	r31, r25
+ 19e:	80 81       	ld	r24, Z
+ 1a0:	0e 94 4b 00 	call	0x96	; 0x96 <shiftOut>
+ 1a4:	c8 01       	movw	r24, r16
+ 1a6:	01 97       	sbiw	r24, 0x01	; 1
+ 1a8:	f1 f7       	brne	.-4      	; 0x1a6 <display_value+0x88>
+    _delay_ms(5);  // Небольшая задержка
+
+    select_digit(3);  // Выбираем разряд 3 (сотни)
+ 1aa:	83 e0       	ldi	r24, 0x03	; 3
+ 1ac:	0e 94 78 00 	call	0xf0	; 0xf0 <select_digit>
+    shiftOut(digits[(value / 100) % 10]);  // Сотни
+ 1b0:	c6 01       	movw	r24, r12
+ 1b2:	64 e6       	ldi	r22, 0x64	; 100
+ 1b4:	70 e0       	ldi	r23, 0x00	; 0
+ 1b6:	0e 94 25 01 	call	0x24a	; 0x24a <__udivmodhi4>
+ 1ba:	cb 01       	movw	r24, r22
+ 1bc:	6a e0       	ldi	r22, 0x0A	; 10
+ 1be:	70 e0       	ldi	r23, 0x00	; 0
+ 1c0:	0e 94 25 01 	call	0x24a	; 0x24a <__udivmodhi4>
+ 1c4:	f7 01       	movw	r30, r14
+ 1c6:	e8 0f       	add	r30, r24
+ 1c8:	f9 1f       	adc	r31, r25
+ 1ca:	80 81       	ld	r24, Z
+ 1cc:	0e 94 4b 00 	call	0x96	; 0x96 <shiftOut>
+ 1d0:	c8 01       	movw	r24, r16
+ 1d2:	01 97       	sbiw	r24, 0x01	; 1
+ 1d4:	f1 f7       	brne	.-4      	; 0x1d2 <display_value+0xb4>
+    _delay_ms(5);  // Небольшая задержка
+
+    select_digit(4);  // Выбираем разряд 4 (тысячи)
+ 1d6:	84 e0       	ldi	r24, 0x04	; 4
+ 1d8:	0e 94 78 00 	call	0xf0	; 0xf0 <select_digit>
+    shiftOut(digits[(value / 1000) % 10]);  // Тысячи
+ 1dc:	c6 01       	movw	r24, r12
+ 1de:	68 ee       	ldi	r22, 0xE8	; 232
+ 1e0:	73 e0       	ldi	r23, 0x03	; 3
+ 1e2:	0e 94 25 01 	call	0x24a	; 0x24a <__udivmodhi4>
+ 1e6:	cb 01       	movw	r24, r22
+ 1e8:	6a e0       	ldi	r22, 0x0A	; 10
+ 1ea:	70 e0       	ldi	r23, 0x00	; 0
+ 1ec:	0e 94 25 01 	call	0x24a	; 0x24a <__udivmodhi4>
+ 1f0:	e8 0e       	add	r14, r24
+ 1f2:	f9 1e       	adc	r15, r25
+ 1f4:	f7 01       	movw	r30, r14
+ 1f6:	80 81       	ld	r24, Z
+ 1f8:	0e 94 4b 00 	call	0x96	; 0x96 <shiftOut>
+ 1fc:	c8 01       	movw	r24, r16
+ 1fe:	01 97       	sbiw	r24, 0x01	; 1
+ 200:	f1 f7       	brne	.-4      	; 0x1fe <display_value+0xe0>
+    _delay_ms(5);  // Небольшая задержка
+}
+ 202:	2a 96       	adiw	r28, 0x0a	; 10
+ 204:	0f b6       	in	r0, 0x3f	; 63
+ 206:	f8 94       	cli
+ 208:	de bf       	out	0x3e, r29	; 62
+ 20a:	0f be       	out	0x3f, r0	; 63
+ 20c:	cd bf       	out	0x3d, r28	; 61
+ 20e:	cf 91       	pop	r28
+ 210:	df 91       	pop	r29
+ 212:	1f 91       	pop	r17
+ 214:	0f 91       	pop	r16
+ 216:	ff 90       	pop	r15
+ 218:	ef 90       	pop	r14
+ 21a:	df 90       	pop	r13
+ 21c:	cf 90       	pop	r12
+ 21e:	08 95       	ret
+
+00000220 <main>:
+
+int main(void) {
+ 220:	cf 93       	push	r28
+ 222:	df 93       	push	r29
+    // Инициализация пинов для работы со сдвиговым регистром
+    DDRB |= (1 << SH_CP_PIN) | (1 << ST_CP_PIN) | (1 << DS_PIN);
+ 224:	84 b1       	in	r24, 0x04	; 4
+ 226:	87 60       	ori	r24, 0x07	; 7
+ 228:	84 b9       	out	0x04, r24	; 4
+
+    // Инициализация MR и OE
+    init_shift_register_control();
+ 22a:	0e 94 6e 00 	call	0xdc	; 0xdc <init_shift_register_control>
+}
+
+// Инициализация управления разрядами индикатора
+void init_display_control() {
+    // Настроить PC2, PC3, PC4, PC5 как выходы для управления разрядами
+    DDRC |= (1 << DIGIT_1) | (1 << DIGIT_2) | (1 << DIGIT_3) | (1 << DIGIT_4);
+ 22e:	87 b1       	in	r24, 0x07	; 7
+ 230:	8c 63       	ori	r24, 0x3C	; 60
+ 232:	87 b9       	out	0x07, r24	; 7
+ 234:	c1 e0       	ldi	r28, 0x01	; 1
+ 236:	d0 e0       	ldi	r29, 0x00	; 0
+
+    uint16_t number = 1;  // Начальное значение для вывода
+
+    // Основной цикл
+    while (number <= 1000) {
+        display_value(number);  // Вывод текущего числа на индикатор
+ 238:	ce 01       	movw	r24, r28
+ 23a:	0e 94 8f 00 	call	0x11e	; 0x11e <display_value>
+        number++;               // Увеличиваем значение
+ 23e:	21 96       	adiw	r28, 0x01	; 1
+    init_display_control();
+
+    uint16_t number = 1;  // Начальное значение для вывода
+
+    // Основной цикл
+    while (number <= 1000) {
+ 240:	83 e0       	ldi	r24, 0x03	; 3
+ 242:	c9 3e       	cpi	r28, 0xE9	; 233
+ 244:	d8 07       	cpc	r29, r24
+ 246:	c1 f7       	brne	.-16     	; 0x238 <main+0x18>
+ 248:	ff cf       	rjmp	.-2      	; 0x248 <main+0x28>
+
+0000024a <__udivmodhi4>:
+ 24a:	aa 1b       	sub	r26, r26
+ 24c:	bb 1b       	sub	r27, r27
+ 24e:	51 e1       	ldi	r21, 0x11	; 17
+ 250:	07 c0       	rjmp	.+14     	; 0x260 <__udivmodhi4_ep>
+
+00000252 <__udivmodhi4_loop>:
+ 252:	aa 1f       	adc	r26, r26
+ 254:	bb 1f       	adc	r27, r27
+ 256:	a6 17       	cp	r26, r22
+ 258:	b7 07       	cpc	r27, r23
+ 25a:	10 f0       	brcs	.+4      	; 0x260 <__udivmodhi4_ep>
+ 25c:	a6 1b       	sub	r26, r22
+ 25e:	b7 0b       	sbc	r27, r23
+
+00000260 <__udivmodhi4_ep>:
+ 260:	88 1f       	adc	r24, r24
+ 262:	99 1f       	adc	r25, r25
+ 264:	5a 95       	dec	r21
+ 266:	a9 f7       	brne	.-22     	; 0x252 <__udivmodhi4_loop>
+ 268:	80 95       	com	r24
+ 26a:	90 95       	com	r25
+ 26c:	bc 01       	movw	r22, r24
+ 26e:	cd 01       	movw	r24, r26
+ 270:	08 95       	ret
+
+00000272 <_exit>:
+ 272:	f8 94       	cli
+
+00000274 <__stop_program>:
+ 274:	ff cf       	rjmp	.-2      	; 0x274 <__stop_program>
